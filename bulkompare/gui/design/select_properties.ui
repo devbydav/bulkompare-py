@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>select_properties</class>
+ <widget class="QDialog" name="select_properties">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>930</width>
+    <height>865</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+    <horstretch>1</horstretch>
+    <verstretch>1</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item row="0" column="1">
+      <widget class="QGroupBox" name="properties0GroupBox">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="acceptDrops">
+        <bool>false</bool>
+       </property>
+       <property name="title">
+        <string>Propriétés des fichiers CSV</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout" stretch="0">
+        <item>
+         <layout class="QFormLayout" name="formLayout0">
+          <item row="0" column="0">
+           <widget class="QLabel" name="skipBlankLines0Lbl">
+            <property name="text">
+             <string>Ignorer lignes vides</string>
+            </property>
+            <property name="buddy">
+             <cstring>skipBlankLines0Cb</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="skipBlankLines0Cb">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="comment0Lbl">
+            <property name="text">
+             <string>Commentaire</string>
+            </property>
+            <property name="buddy">
+             <cstring>comment0Le</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="comment0Le"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="heading0Lbl">
+            <property name="text">
+             <string>Ligne des en-têtes</string>
+            </property>
+            <property name="buddy">
+             <cstring>heading0Le</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="heading0Le"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="encoding0Lbl">
+            <property name="text">
+             <string>Encodage</string>
+            </property>
+            <property name="buddy">
+             <cstring>encoding0Le</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="encoding0Le"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="separator0Lbl">
+            <property name="text">
+             <string>Séparateur</string>
+            </property>
+            <property name="buddy">
+             <cstring>separator0Le</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="separator0Le">
+            <property name="placeholderText">
+             <string>TAB</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="extension0Lbl">
+            <property name="text">
+             <string>Extension</string>
+            </property>
+            <property name="buddy">
+             <cstring>extension0Le</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="extension0Le">
+            <property name="clearButtonEnabled">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="strip0Lbl">
+            <property name="text">
+             <string>Ignorer whitespace</string>
+            </property>
+            <property name="buddy">
+             <cstring>strip0Cb</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QCheckBox" name="strip0Cb"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QGroupBox" name="properties1Groupbox">
+       <property name="title">
+        <string>Propriétés des fichiers CSV</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QFormLayout" name="formLayout1">
+          <item row="0" column="0">
+           <widget class="QLabel" name="skipBlankLines1Lbl">
+            <property name="text">
+             <string>Ignorer lignes vides</string>
+            </property>
+            <property name="buddy">
+             <cstring>skipBlankLines1Cb</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="skipBlankLines1Cb">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="comment1Lbl">
+            <property name="text">
+             <string>Commentaire</string>
+            </property>
+            <property name="buddy">
+             <cstring>comment1Le</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="comment1Le"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="heading1Lbl">
+            <property name="text">
+             <string>Ligne des en-têtes</string>
+            </property>
+            <property name="buddy">
+             <cstring>heading1Le</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="heading1Le"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="encoding1Lbl">
+            <property name="text">
+             <string>Encodage</string>
+            </property>
+            <property name="buddy">
+             <cstring>encoding1Le</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="encoding1Le"/>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="separator1Lbl">
+            <property name="text">
+             <string>Séparateur</string>
+            </property>
+            <property name="buddy">
+             <cstring>separator1Le</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLineEdit" name="separator1Le">
+            <property name="placeholderText">
+             <string>TAB</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="extension1Lbl">
+            <property name="text">
+             <string>Extension</string>
+            </property>
+            <property name="buddy">
+             <cstring>extension1Le</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="extension1Le"/>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="strip1Lbl">
+            <property name="text">
+             <string>Ignorer whitespace</string>
+            </property>
+            <property name="buddy">
+             <cstring>strip1Cb</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QCheckBox" name="strip1Cb"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item row="1" column="1" colspan="2">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item alignment="Qt::AlignRight">
+        <widget class="QPushButton" name="cancelBtn">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Annuler</string>
+         </property>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignLeft">
+        <widget class="QPushButton" name="validateBtn">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Valider</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>skipBlankLines0Cb</tabstop>
+  <tabstop>skipBlankLines1Cb</tabstop>
+  <tabstop>comment0Le</tabstop>
+  <tabstop>comment1Le</tabstop>
+  <tabstop>heading0Le</tabstop>
+  <tabstop>heading1Le</tabstop>
+  <tabstop>encoding0Le</tabstop>
+  <tabstop>encoding1Le</tabstop>
+  <tabstop>separator0Le</tabstop>
+  <tabstop>separator1Le</tabstop>
+  <tabstop>extension0Le</tabstop>
+  <tabstop>extension1Le</tabstop>
+  <tabstop>strip0Cb</tabstop>
+  <tabstop>strip1Cb</tabstop>
+  <tabstop>cancelBtn</tabstop>
+  <tabstop>validateBtn</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,87 @@
+{
+  "names": [
+    "Before",
+    "After"
+  ],
+  "directories": [
+    "data/a",
+    "data/b"
+  ],
+  "comparators": [
+    {
+      "extension": "tsv",
+      "index_columns": [
+        "Date",
+        "Time",
+        "Name"
+      ],
+      "compare_columns": [
+        "Empty",
+        "Val1",
+        "Val2",
+        "Val3"
+      ],
+      "display_columns": [
+        "Name",
+        "Val3"
+      ],
+      "csv_sets": [
+        {
+          "encoding": "utf8",
+          "comment": "#",
+          "skip_blank_lines": false,
+          "header": 0,
+          "separator": "\t",
+          "strip": true,
+          "mapping": {}
+        },
+        {
+          "encoding": "utf8",
+          "comment": "#",
+          "skip_blank_lines": false,
+          "header": 0,
+          "separator": "\t",
+          "strip": true,
+          "mapping": {}
+        }
+      ]
+    },
+    {
+      "extension": "other",
+      "index_columns": [
+        "Date",
+        "Time",
+        "Name"
+      ],
+      "compare_columns": [
+        "Empty",
+        "Val1",
+        "Val2",
+        "Val3"
+      ],
+      "display_columns": [
+        "Name"
+      ],
+      "csv_sets": [
+        {
+          "encoding": "utf8",
+          "comment": "#",
+          "skip_blank_lines": false,
+          "header": 0,
+          "separator": "\t",
+          "strip": true,
+          "mapping": {}
+        },
+        {
+          "encoding": "utf8",
+          "comment": "#",
+          "skip_blank_lines": false,
+          "header": 0,
+          "separator": "\t",
+          "strip": true,
+          "mapping": {}
+        }
+      ]
+    }
+  ]
+}
