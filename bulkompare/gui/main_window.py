@@ -247,7 +247,7 @@ class MainWindow(QtWidgets.QMainWindow):
         except AttributeError:
             pass
         else:
-            if has_children:
+            if not has_children:
                 try:
                     text = self._custom.tree_item_double_clicked(item=item)
                 except CustomError as e:
