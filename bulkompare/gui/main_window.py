@@ -13,7 +13,7 @@ from gui.select_sources import SelectSourcesWidget
 from gui.select_properties import SelectPropertiesWidget
 from gui.select_columns import SelectColumnsWidget
 from gui.select_mapping import SelectMappingWidget
-from gui.trees import AbstractTreeManager, SummaryTreeManager, DifferencesTreeManager, GenericTreeManager
+from gui.trees import AbstractTreeManager, SummaryTreeManager, DifferencesTreeManager, GenericTreeManager, FilterError
 from gui.design.main_window_ui import Ui_MainWindow
 from gui.constants import ActionStatus, ACTION_STATUS
 from api.worker import Worker
@@ -110,13 +110,16 @@ class MainWindow(QtWidgets.QMainWindow):
         self._ui.actionSelectColumns.triggered.connect(self._select_columns_clicked)
         self._ui.actionSelectMapping.triggered.connect(self._select_mapping_clicked)
         self._ui.actionCompare.triggered.connect(self._compare)
+        self._ui.actionToggleFilter.triggered.connect(self._toggle_filter)
         self._ui.actionLoadSelection.triggered.connect(self._load_selections)
         self._ui.actionSaveSelection.triggered.connect(self._save_selections)
         self._ui.actionShowAbout.triggered.connect(self._show_about)
         self._extensionsCb.currentIndexChanged.connect(self._change_current_extension)
+        self._ui.tabWidget.currentChanged.connect(self._current_tab_changed)
         self._ui.differencesTw.doubleClicked.connect(self._tree_widget_double_clicked)
         self._ui.inOneTw.doubleClicked.connect(self._tree_widget_double_clicked)
         self._ui.notComparedTw.doubleClicked.connect(self._tree_widget_double_clicked)
+        self._ui.filterLe.returnPressed.connect(self._filter_changed)
 
         self._custom = Custom(self._config.custom)
 
@@ -177,6 +180,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._ui.actionSelectColumns.setEnabled(False)
         self._ui.actionSelectMapping.setEnabled(False)
         self._ui.actionCompare.setEnabled(False)
+        self._ui.actionToggleFilter.setEnabled(False)
 
     def _select_columns_clicked(self):
         """Callback when select columns action is clicked"""
@@ -314,12 +318,14 @@ class MainWindow(QtWidgets.QMainWindow):
 
         if status == Status.DATA_IMPORTED:
             self._set_action_status(ActionStatus.DISABLED, action=self._ui.actionCompare)
+            self._reset_filter(allow=True)
 
             # display results
             self._display_main_area(logo=False)
 
         else:
             self._display_main_area(logo=True)
+            self._reset_filter(allow=False)
 
             if status == Status.READY_TO_IMPORT:
                 self._set_action_status(ActionStatus.INVALID, action=self._ui.actionCompare)
@@ -346,19 +352,22 @@ class MainWindow(QtWidgets.QMainWindow):
 
         differences_tm = DifferencesTreeManager(self._ui.differencesTw,
                                                 self._manager.differences,
-                                                display_columns=display_columns)
+                                                display_columns=display_columns,
+                                                filterable=True)
         self._tree_managers.append(differences_tm)
 
         in_one_tm = GenericTreeManager(self._ui.inOneTw,
                                        self._manager.in_one,
                                        display_columns=display_columns,
-                                       compare_columns=compare_columns)
+                                       compare_columns=compare_columns,
+                                       filterable=True)
         self._tree_managers.append(in_one_tm)
 
         not_compared_tm = GenericTreeManager(self._ui.notComparedTw,
                                              self._manager.not_compared,
                                              display_columns=display_columns,
-                                             compare_columns=compare_columns)
+                                             compare_columns=compare_columns,
+                                             filterable=True)
         self._tree_managers.append(not_compared_tm)
 
         self._update_current_tree_manager(self._ui.tabWidget.currentIndex())
@@ -374,6 +383,58 @@ class MainWindow(QtWidgets.QMainWindow):
     def _clear_status_right_text(self):
         """Clears the right part of status bar. It is called when timer ends"""
         self._statusRightLabel.setText("")
+
+    def _filter_changed(self):
+        """Callback when user presses enter on the filter listEdit"""
+        text = self._ui.filterLe.text()
+        logger.debug("filter changed to " + text)
+        try:
+            self._tree_managers[self._ui.tabWidget.currentIndex()].filter(text)
+
+        except FilterError as e:
+            self._ui.filterLe.setStyleSheet("border: 1px solid red;")
+            QtWidgets.QMessageBox.warning(self, "Erreur", str(e))
+        else:
+            if text:
+                self._ui.filterLe.setStyleSheet("border: 1px solid green;")
+            else:
+                self._ui.filterLe.setStyleSheet("")
+
+    def _reset_filter(self, allow: bool = True):
+        """Resets and hides the filter lineEdit and enables button according to status"""
+
+        self._ui.filterLe.setText("")
+        self._ui.filterLe.hide()
+
+        if allow and self._current_tree_manager and self._current_tree_manager.filterable:
+            self._ui.actionToggleFilter.setEnabled(True)
+        else:
+            self._ui.actionToggleFilter.setEnabled(False)
+
+    def _toggle_filter(self):
+        """Callback when filter action is pressed"""
+        new_status = self._current_tree_manager.toggle_filtering()
+        if new_status:
+            self._ui.filterLe.show()
+            self._ui.filterLe.setText(self._current_tree_manager.filter_text)
+        else:
+            self._ui.filterLe.hide()
+            self._ui.filterLe.setText("")
+
+    def _current_tab_changed(self, index):
+        """Callback when selected tab is changed"""
+
+        self._update_current_tree_manager(index)
+
+        # show/hide the filter listEdit
+        if self._current_tree_manager and self._current_tree_manager.filtering:
+            self._ui.filterLe.setText(self._current_tree_manager.filter_text)
+            self._ui.filterLe.show()
+        else:
+            self._ui.filterLe.hide()
+
+        # enable/disable filtering according to whether tree is filterable
+        self._ui.actionToggleFilter.setEnabled(self._current_tree_manager.filterable)
 
     def _show_error_dialog(self, error: str):
         QtWidgets.QMessageBox.warning(self, "Erreur", error)
