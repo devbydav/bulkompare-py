@@ -375,6 +375,16 @@ class MainWindow(QtWidgets.QMainWindow):
     def _update_current_tree_manager(self, tab_index):
         self._current_tree_manager = self._tree_managers[tab_index]
 
+    def _update_status_bar(self):
+        """Updates the message displayed in status bar"""
+        if self._current_tree_manager and self._current_tree_manager.filterable:
+            if self._current_tree_manager.filtering:
+                self._ui.statusBar.showMessage(f"{self._current_tree_manager.nb_filtered_lines} / {self._current_tree_manager.nb_total_lines} lignes")
+            else:
+                self._ui.statusBar.showMessage(f"{self._current_tree_manager.nb_total_lines} lignes")
+        else:
+            self._ui.statusBar.clearMessage()
+
     def _set_status_bar_right_text(self, text):
         """Display text to the right of status bar. It is cleared at the end of the timer"""
         self._statusRightLabel.setText(text)
@@ -400,6 +410,8 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 self._ui.filterLe.setStyleSheet("")
 
+        self._update_status_bar()
+
     def _reset_filter(self, allow: bool = True):
         """Resets and hides the filter lineEdit and enables button according to status"""
 
@@ -421,6 +433,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self._ui.filterLe.hide()
             self._ui.filterLe.setText("")
 
+            self._update_status_bar()
+
     def _current_tab_changed(self, index):
         """Callback when selected tab is changed"""
 
@@ -435,6 +449,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # enable/disable filtering according to whether tree is filterable
         self._ui.actionToggleFilter.setEnabled(self._current_tree_manager.filterable)
+
+        self._update_status_bar()
 
     def _show_error_dialog(self, error: str):
         QtWidgets.QMessageBox.warning(self, "Erreur", error)
