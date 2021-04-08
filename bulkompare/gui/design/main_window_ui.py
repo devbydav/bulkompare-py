@@ -166,7 +166,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"CsvComparator", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Bulkompare", None))
         self.actionSelectDirs.setText(QCoreApplication.translate("MainWindow", u"R\u00e9pertoires et extensions", None))
         self.actionSelectProperties.setText(QCoreApplication.translate("MainWindow", u"Propri\u00e9t\u00e9s CSV", None))
 #if QT_CONFIG(tooltip)

@@ -2,7 +2,7 @@ from PySide2 import QtWidgets
 
 VERSION = "0.1.0"
 
-ABOUT = f"""CsvComparator v{VERSION}
+ABOUT = f"""Bulkompare v{VERSION}
 
 Logiciel sous license GPL
 
