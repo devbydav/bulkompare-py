@@ -16,6 +16,7 @@ from gui.select_mapping import SelectMappingWidget
 from gui.trees import AbstractTreeManager, SummaryTreeManager, DifferencesTreeManager, GenericTreeManager, FilterError
 from gui.design.main_window_ui import Ui_MainWindow
 from gui.constants import ActionStatus, ACTION_STATUS
+from api import bundle_dir
 from api.worker import Worker
 from api.utils.constants import Status
 from api.utils.config import import_gui_config
@@ -36,13 +37,13 @@ STR_TB_ACTION_SHOW_ABOUT = "Legal"
 
 
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self, root_dir: pathlib.Path):
+    def __init__(self):
         super().__init__()
 
         # sets/comparator
-        self._config = import_gui_config(root_dir / "config" / "config.json")
+        self._config = import_gui_config(bundle_dir / "config" / "config.json")
         try:
-            self._manager: CsvManager = import_selection(root_dir / "selections" / "default.json")
+            self._manager: CsvManager = import_selection(bundle_dir / "selections" / "default.json")
         except Exception as e:
             self._manager = CsvManager()
             self._show_error_dialog(str(e))
@@ -54,7 +55,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self._tree_managers: List[AbstractTreeManager] = []
 
-        self._resource_dir: pathlib.Path = root_dir / "resources"
+        self._resource_dir: pathlib.Path = bundle_dir / "resources"
+        self.setWindowIcon(QtGui.QIcon(str(self._resource_dir / "icons" / "Icon.ico")))
 
         # icons
         self._ICON_VALID = QtGui.QIcon(QtGui.QPixmap(str(self._resource_dir / "svg" / "tick.svg")))

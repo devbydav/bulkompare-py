@@ -5,6 +5,7 @@ import pathlib
 
 from pydantic import BaseModel
 
+from api import bundle_dir
 from api.utils.constants import home_dir
 
 logger = logging.getLogger(__name__)
@@ -41,7 +42,7 @@ class GuiConfig(ConfiguredModel):
     csv_dir: pathlib.Path = home_dir
 
     # path when opening a dialog for selecting a selection file
-    selections_dir: pathlib.Path = pathlib.Path(__file__).parent
+    selections_dir: pathlib.Path = bundle_dir
 
     custom: dict = dict()
 

@@ -4,6 +4,7 @@ from typing import Optional, List, Tuple
 
 from pydantic import validator
 
+from api import bundle_dir
 from api.utils.config import ConfiguredModel
 from api.utils.constants import Status, home_dir
 from api.csv_comparator import CsvComparator
@@ -96,7 +97,7 @@ class CsvManager(ConfiguredModel):
         """Saves selections to a file"""
 
         if not path:
-            path = pathlib.Path(__file__).resolve().parent.parent / "config" / "defaultTEST.json"
+            path = bundle_dir / "config" / "defaultTEST.json"
 
         json_dump = self.json(include={
             "names": ...,
